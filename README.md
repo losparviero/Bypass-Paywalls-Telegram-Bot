@@ -24,8 +24,6 @@ Run ```rm -rf <code directory>/*```
 
 >_*Note:* Be careful with this command, if you don't know it don't use it and delete from file explorer._
 
-Followed by, ```npm uninstall grammy @grammyjs/runner```
-
 #### Cloud Host
 
 _TBA_
