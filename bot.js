@@ -14,8 +14,18 @@ function getSessionKey(ctx) {
 bot.use(sequentialize(getSessionKey));
 bot.use(session({ getSessionKey }));
 
+// Respond to the command /start.
+bot.command("start", (ctx) => ctx.reply("Welcome! ✨ Send a webpage or article behind a paywall and we will remove it for you."));
+// Respond to the command /help.
+bot.command("help", (ctx) => ctx.reply("This bot uses the 12ft.io proxy service to unblock and bypass paywalls. It's not guaranteed to work with all websites and also relies upon the working status of the proxy service. Both are free services hosted and are operational on voluntary basis and are subject to shutdown at any point in time. This bot is hosted on my personal VPS and will stay online for the foreseeable period. To contribute to the codebase or raise an issue please visit our Github: https://github.com/Grahtni/Bypass-Paywalls-Telegram-Bot/.") );
+
 // Add the usual middleware, now with safe session support.
-bot.on("message", (ctx) => ctx.reply("https://12ft.io/" + ctx.message.text));
+bot.on("message::url", (ctx) => ctx.reply("Here's the unblocked link: 🔓 https://12ft.io/" + ctx.message.text));
+
+/*await bot.api.setMyCommands([
+  { command: "start", description: "Start the bot." },
+  { command: "help", description: "Show help text." },
+]);*/  
 
 // Run it concurrently.
 run(bot);
