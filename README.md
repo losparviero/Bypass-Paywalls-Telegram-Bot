@@ -6,7 +6,7 @@
 
 #### Install (Self Host):
 
-1. Clone repo and run ```npm i -g grammy```
+1. Clone repo and run ```npm i -g grammy @grammyjs/runner```
 
 2. Edit .env file to include your bot token, can be found by creating a new bot using @BotFather.
 
@@ -34,11 +34,11 @@ _TBA_
 
 Docker container
 
-One cick deploy to cloud
+One click deploy to cloud
 
 Switch to Webhook
 
-Export to AWS Lambda Serverless function
+Export to AWS Lambda serverless function
 
 #### License
 
