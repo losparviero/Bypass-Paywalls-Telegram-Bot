@@ -2,6 +2,8 @@
 
 ###### _A simple personal project to learn bot development for Telegram using the [Grammy](https://github.com/grammyjs/grammY) framework._
 
+###### _A Chrome extension for the same can be found [here](https://github.com/Grahtni/Bypass-Paywalls)._
+
 ##### Telegram bot to unblock paywalled articles on web sites using the 12ft.io proxy.
 
 #### Install (Self Host):
