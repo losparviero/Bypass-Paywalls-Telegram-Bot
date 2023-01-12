@@ -1,12 +1,21 @@
+const { Bot, Context, session } = require("grammy");
+const { run, sequentialize } = require("@grammyjs/runner");
 require('dotenv').config();
-const { Bot } = require("grammy");
 
+// Create a bot.
+const bot = new Bot(process.env.BOT_TOKEN);
 
-// Create a bot object
-const bot = new Bot(process.env.BOT_TOKEN); // <-- place your bot token in this string
+// Build a unique identifier for the `Context` object.
+function getSessionKey(ctx) {
+  return ctx.chat?.id.toString();
+}
 
-// Register listeners to handle messages
-bot.on("message:text", (ctx) => ctx.reply("https://12ft.io/" + ctx.message.text));
+// Sequentialize before accessing session data.
+bot.use(sequentialize(getSessionKey));
+bot.use(session({ getSessionKey }));
 
-// Start the bot (using long polling)
-bot.start();
+// Add the usual middleware, now with safe session support.
+bot.on("message", (ctx) => ctx.reply("https://12ft.io/" + ctx.message.text));
+
+// Run it concurrently.
+run(bot);
