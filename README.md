@@ -6,7 +6,7 @@
 
 #### Install (Self Host):
 
-1. Clone repo and run ```npm i -g grammy @grammyjs/runner```
+1. Clone repo and run in folder ```npm i grammy @grammyjs/runner```
 
 2. Edit .env file to include your bot token, can be found by creating a new bot using @BotFather.
 
