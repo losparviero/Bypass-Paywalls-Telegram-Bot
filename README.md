@@ -10,7 +10,7 @@
 
 1. Clone repo and run in folder ```npm i```
 
-2. Edit .env file to include your bot token, can be found by creating a new bot using @BotFather.
+2. Edit .env file to include your bot token.
 
 3. Open terminal in code directory and run ```node bot.js```
 
