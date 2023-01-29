@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "@grammyjs/runner": "^1.0.4",
     "dotenv": "^16.0.3",
     "grammy": "^1.13.0"
   }
