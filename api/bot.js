@@ -46,7 +46,7 @@ bot.on("msg", async (ctx) => {
       await ctx.reply("*Send a link with a valid URL.*", { reply_to_message_id:ctx.message.message_id, parse_mode: "Markdown" }).catch((error) => console.error(error)); }
     else {
       let modifiedUrls = ctx.msg.text.replace(urlRegex, "https://12ft.io/$1");
-      await ctx.reply(`Here's the unblocked link: 🔓 ${modifiedUrls}`).catch((error) => console.error(error)); }
+      await ctx.reply(`*Here's the unblocked link:* 🔓 \n${modifiedUrls}`, { reply_to_message_id: ctx.msg.message_id, parse_mode: "Markdown" }).catch((error) => console.error(error)); }
       
   });
 
