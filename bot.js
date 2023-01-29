@@ -1,4 +1,4 @@
-const { Bot } = require("grammy");
+const { Bot, GrammyError, HttpError  } = require("grammy");
 require('dotenv').config();
 const urlRegex = /(https?:\/\/[^\s]+)/g;
 
