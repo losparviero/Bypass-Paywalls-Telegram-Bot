@@ -34,7 +34,7 @@ bot.command("help", async (ctx) => {
 bot.on("msg", async (ctx) => {
 
     // Logging
-
+  
     if (ctx.from.last_name === undefined) {
       console.log('From:', ctx.from.first_name, '(@' + ctx.from.username + ')', 'ID:', ctx.from.id); }
     else { console.log('From:', ctx.from.first_name, ctx.from.last_name, '(@' + ctx.from.username + ')', 'ID:', ctx.from.id); }
@@ -42,12 +42,18 @@ bot.on("msg", async (ctx) => {
 
     // Logic
 
+  try {
     if (!urlRegex.test(ctx.msg.text)) {
       await ctx.reply("*Send a link with a valid URL.*", { reply_to_message_id:ctx.message.message_id, parse_mode: "Markdown" }).catch((error) => console.error(error)); }
     else {
       let modifiedUrls = ctx.msg.text.replace(urlRegex, "https://12ft.io/$1");
       await ctx.reply(`*Here's the unblocked link:* 🔓 \n${modifiedUrls}`, { reply_to_message_id: ctx.msg.message_id, parse_mode: "Markdown" }).catch((error) => console.error(error)); }
-      
+    } catch (error) {
+      await ctx.reply ("Query: " + ctx.msg.text + " not found!");
+      console.error(error);
+      return;
+    }
+
   });
 
   // Function
