@@ -1,6 +1,6 @@
 # Bypass Paywalls Telegram Bot
 
-Unblock web sites with paywalled articles by forwarding links to Telegram.
+Unblock web sites with paywalled articles by forwarding links to Telegram!
 
 <br>
 
