@@ -1,10 +1,19 @@
-const { Bot } = require("grammy");
+const { Bot, GrammyError, HttpError } = require("grammy");
+const { run, sequentialize } = require("@grammyjs/runner");
 require('dotenv').config();
 const urlRegex = /(https?:\/\/[^\s]+)/g;
 
 // Bot
 
 const bot = new Bot(process.env.BOT_TOKEN);
+
+// Concurrency
+
+function getSessionKey(ctx) {
+  return ctx.chat?.id.toString(); }
+
+bot.use(sequentialize(getSessionKey));
+bot.use(session({ getSessionKey }));
 
 // Commands
 
@@ -53,4 +62,4 @@ bot.catch((err) => {
 // Run
 
 console.log('Bot running. Please keep this window open or use a startup manager like PM2 to setup persistent execution and store logs.');
-bot.start();
+run(bot);
