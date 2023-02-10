@@ -3,6 +3,11 @@ require("dotenv").config();
 const urlRegex =
   /((https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,63}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))/g;
 
+// DB
+
+const mysql = require("mysql2");
+const connection = mysql.createConnection(process.env.DATABASE_URL);
+
 // Bot
 
 const bot = new Bot(process.env.BOT_TOKEN);
@@ -25,7 +30,37 @@ bot.command("start", async (ctx) => {
     .reply("*Welcome!* ✨ Send a webpage or article behind a paywall.", {
       parse_mode: "Markdown",
     })
-    .then(() => console.log("New user added:", ctx.from))
+    .then(() => {
+      connection.query(
+        `
+  SELECT * FROM users WHERE userid = ?
+`,
+        [ctx.from.id],
+        (error, results) => {
+          if (error) throw error;
+          if (results.length === 0) {
+            connection.query(
+              `
+      INSERT INTO users (userid, username, firstName, lastName, firstSeen)
+      VALUES (?, ?, ?, ?, NOW())
+    `,
+              [
+                ctx.from.id,
+                ctx.from.username,
+                ctx.from.first_name,
+                ctx.from.last_name,
+              ],
+              (error, results) => {
+                if (error) throw error;
+                console.log("New user added:", ctx.from);
+              }
+            );
+          } else {
+            console.log("User exists in database.", ctx.from.id);
+          }
+        }
+      );
+    })
     .catch((error) => console.error(error));
 });
 bot.command("help", async (ctx) => {
